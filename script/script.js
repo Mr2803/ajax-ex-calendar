@@ -34,14 +34,13 @@ $(document).ready(function () {
             var dataCorrente = "2018-01-" + i;
             var formatoData = moment(dataCorrente).format("YYYY-MM-DD")
             var giornoCorrente = moment(dataCorrente).format("DD MMMM");
-            $(".calendar").append('<li data-date="' + formatoData +'">'+giornoCorrente+'</li>')
-
-           
+            $(".calendar").append('<li data-date="' + formatoData +'">'+ giornoCorrente +'</li>');
          }
          for (var i = 0; i < data.response.length; i++) {
             console.log("queste sono le date delle festività " + data.response[i].date)
+
             var festivita = data.response[i].date  
-            $(".calendar [data-date = '" + festivita + "']").css("color","red")
+            $(".calendar [data-date='" + festivita + "']").css("color","red").append(" "+data.response[i].name)
                /* $(".calendar").append('<li data-date="' + dataCorrente + '">' + giornoCorrente + '</li>').css("color","red") */
 
             
