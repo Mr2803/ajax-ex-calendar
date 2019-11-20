@@ -18,15 +18,36 @@ Buon pome e rimanete in ascolto su questo canale per comunicazioni possibili nel
 $(document).ready(function () {
 
 /* var giorniMese = moment("2019-02", "YYYY-MM").daysInMonth(); */
-var genuary = moment("2018-01" , "MM");
-console.log(genuary)
+/* var genuary = moment("2018-01" , "YYYY-MM");
+console.log("questa variabile indica il mese di gennaio 2018" + genuary)
 
 var day1 = genuary.format("DD")
-console.log(day1)
+console.log(day1) */
+   var meseAnno = moment("2018-01", "YYYY-MM");
+console.log("questo è il valore del mese che mi serve " + meseAnno);
 
-for (i = 0; i < moment().format("MM"); i++) {
-   var days = genuary.add(1, "days")
-   console.log(days)
+
+
+
+for (i = 1; i <= meseAnno.daysInMonth(); i++) {
+   console.log("giorno", i , "di", meseAnno.format("MMMM"))
 }
+
+//2015-10-31
+
+
+
+
+
+   $.ajax({
+      url: "https://flynn.boolean.careers/exercises/api/holidays?year=2018&month=0",
+      method: "GET",
+      success: function (data, stato) {
+
+      },
+      error: function (richiesta, stato, errori) {
+         alert("E' avvenuto un errore. " + " " + richiesta + " " + stato + " " + errori);
+      }
+   });
 
 })
