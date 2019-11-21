@@ -14,7 +14,6 @@ NOTE:
 vado passo passo, isolando una cosa alla volta (prima analisi, poi documentazione, quindi logica con semplici log e poi passo a stampare in pagina).
 Buon pome e rimanete in ascolto su questo canale per comunicazioni possibili nel mezzo. :v:
  */
-
  /* ESEMPI NIKOLAS
  
  //Ottengo una data formattata del momento in cui si esegue questa riga
@@ -49,33 +48,41 @@ for(var i = 1; i <= numeroDiGiorni; i++) {
     } */
 
 $(document).ready(function () {
-    //chiamata ajax da trasformare in funzione esterna
-   $.ajax({
-      url: "https://flynn.boolean.careers/exercises/api/holidays?year=2018&month=0",
-      method: "GET",
-      success: function (data) {
-         console.log(data.response)
-         
-         //imposto una variabile , setto anno , mese e giorno di partenza e richiedo il conteggio dei giorni di quel mese
-         var daysNumber = moment("2018-01-01", "YYYY-MM-DD").daysInMonth();
-         
-         //apro un ciclo for sulla lunghezza del mese che ho selezionato nella mia variabile
-         for (i = 1; i <= daysNumber; i++) {
-            //imposto una variabile che ha valore della data corrente tranne il giorno che sarà definito dal mio index
-            var dataCorrente = "2018-01-" + i;
-            //imposto una variabile che stabilisce il formato della mia variabile precedente in modo da renderlo uguale ai valori che mi rilascia l'api che ho utilizzato
-            var formatoData = moment(dataCorrente).format("YYYY-MM-DD")
-            console.log(formatoData)
-            //imposto una variabile che sarà la mia stampa in pagina
-            var giornoCorrente = moment(dataCorrente).format("DD MMMM");
-            console.log(giornoCorrente);
-            //stampo in pagina
-            $(".calendar").append('<li data-date="' + formatoData +'">'+ giornoCorrente +'</li>');
-         }
-         //faccio un ciclo FOR per estrapolare i dati dell'oggetto che mi rilascia l'api che ho selezionato
+   var mese = 1;
+   printDays(mese);
+   holidayOrNot(mese);
+})
+ 
 
-         //aggiungo una condizione per far si che questa parte della funzione venga eseguita solo se l'array delle festività non sia vuoto
-         if (data.response.length>0){
+//funzione per stampare i giorni del mese
+function printDays(mese){
+
+   //imposto una variabile , setto anno , mese e giorno di partenza e richiedo il conteggio dei giorni di quel mese
+   var daysNumber = moment("2018" + mese + "01" , "YYYY-MM-DD").daysInMonth();
+   
+   //apro un ciclo for sulla lunghezza del mese che ho selezionato nella mia variabile
+   for (i = 1; i <= daysNumber; i++) {
+      //imposto una variabile che ha valore della data corrente tranne il giorno che sarà definito dal mio index
+      var dataCorrente = moment('2018-' + mese + '-' + i, 'YYYY-MM-D').format('YYYY-MM-DD');
+      //imposto una variabile che stabilisce il formato della mia variabile precedente in modo da renderlo uguale ai valori che mi rilascia l'api che ho utilizzato
+      var formatoData = moment(dataCorrente).format("YYYY-MM-DD")
+      console.log(formatoData)
+      //imposto una variabile che sarà la mia stampa in pagina
+      var giornoCorrente = moment(dataCorrente).format("DD MMMM");
+      console.log(giornoCorrente);
+      //stampo in pagina
+      $(".calendar").append('<li data-date="' + formatoData + '">' + giornoCorrente + '</li>');
+   }
+}
+
+//funzione per effettuare la chiamata AJAX
+function holidayOrNot(mese){
+   $.ajax({
+      url: "https://flynn.boolean.careers/exercises/api/holidays?year=2018&month=" + (mese-1),
+      method: "GET",
+      
+      success: function (data) {
+         if (data.response.length > 0) {
             for (var i = 0; i < data.response.length; i++) {
                console.log(data.response.length)
                console.log("queste sono le date delle festività " + data.response[i].date)
@@ -87,11 +94,11 @@ $(document).ready(function () {
             }
 
          }
-        
       },
       error: function (richiesta, stato, errori) {
          alert("E' avvenuto un errore. " + " " + richiesta + " " + stato + " " + errori);
       }
-   });
+   })
+}
 
-})
+
