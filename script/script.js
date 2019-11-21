@@ -49,18 +49,13 @@ for(var i = 1; i <= numeroDiGiorni; i++) {
     } */
 
 $(document).ready(function () {
-
-
-
-
-
-   //chiamata ajax da trasformare in funzione esterna
+    //chiamata ajax da trasformare in funzione esterna
    $.ajax({
       url: "https://flynn.boolean.careers/exercises/api/holidays?year=2018&month=0",
       method: "GET",
       success: function (data) {
          console.log(data.response)
-
+         
          //imposto una variabile , setto anno , mese e giorno di partenza e richiedo il conteggio dei giorni di quel mese
          var daysNumber = moment("2018-01-01", "YYYY-MM-DD").daysInMonth();
          
@@ -78,21 +73,21 @@ $(document).ready(function () {
             $(".calendar").append('<li data-date="' + formatoData +'">'+ giornoCorrente +'</li>');
          }
          //faccio un ciclo FOR per estrapolare i dati dell'oggetto che mi rilascia l'api che ho selezionato
-         for (var i = 0; i < data.response.length; i++) {
-            console.log("queste sono le date delle festività " + data.response[i].date)
 
-            //imposto una variabile che ha valore date (chiave della mia api)
-            var festivita = data.response[i].date  
-            //sostituisco in pagina gli elementi che hanno come attributo un valore uguale alla mia festività , li coloro di rosso e APPEND il nome della festività (altra chiave della mia api)
-            $(".calendar [data-date='" + festivita + "']").css("color","red").append(" "+data.response[i].name)
-               /* $(".calendar").append('<li data-date="' + dataCorrente + '">' + giornoCorrente + '</li>').css("color","red") */
+         //aggiungo una condizione per far si che questa parte della funzione venga eseguita solo se l'array delle festività non sia vuoto
+         if (data.response.length>0){
+            for (var i = 0; i < data.response.length; i++) {
+               console.log(data.response.length)
+               console.log("queste sono le date delle festività " + data.response[i].date)
 
-            
+               //imposto una variabile che ha valore date (chiave della mia api)
+               var festivita = data.response[i].date
+               //sostituisco in pagina gli elementi che hanno come attributo un valore uguale alla mia festività , li coloro di rosso e APPEND il nome della festività (altra chiave della mia api)
+               $(".calendar [data-date='" + festivita + "']").css("color", "red").append(" " + data.response[i].name)
+            }
+
          }
-
-         
-
-
+        
       },
       error: function (richiesta, stato, errori) {
          alert("E' avvenuto un errore. " + " " + richiesta + " " + stato + " " + errori);
