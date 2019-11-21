@@ -51,6 +51,12 @@ $(document).ready(function () {
    var mese = 1;
    printDays(mese);
    holidayOrNot(mese);
+  /*  $(document).click(function(){
+      var mese = mese +1
+   }) */
+   $("#my_next").click(function(){
+      mese++
+   })
 })
  
 
@@ -58,18 +64,19 @@ $(document).ready(function () {
 function printDays(mese){
 
    //imposto una variabile , setto anno , mese e giorno di partenza e richiedo il conteggio dei giorni di quel mese
-   var daysNumber = moment("2018" + mese + "01" , "YYYY-MM-DD").daysInMonth();
+   /* var daysNumber = moment("2018" + mese + "01" , "YYYY-MM-DD").daysInMonth(); */
+   var daysNumber = moment("2018-0" + mese, "YYYY-MM").daysInMonth();
+   
    
    //apro un ciclo for sulla lunghezza del mese che ho selezionato nella mia variabile
    for (i = 1; i <= daysNumber; i++) {
       //imposto una variabile che ha valore della data corrente tranne il giorno che sarà definito dal mio index
-      var dataCorrente = moment('2018-' + mese + '-' + i, 'YYYY-MM-D').format('YYYY-MM-DD');
+      var dataCorrente = moment('2018-' + mese + '-' + i , 'YYYY-MM-D').format('YYYY-MM-DD');
+      console.log(dataCorrente)
       //imposto una variabile che stabilisce il formato della mia variabile precedente in modo da renderlo uguale ai valori che mi rilascia l'api che ho utilizzato
       var formatoData = moment(dataCorrente).format("YYYY-MM-DD")
-      console.log(formatoData)
       //imposto una variabile che sarà la mia stampa in pagina
       var giornoCorrente = moment(dataCorrente).format("DD MMMM");
-      console.log(giornoCorrente);
       //stampo in pagina
       $(".calendar").append('<li data-date="' + formatoData + '">' + giornoCorrente + '</li>');
    }
@@ -78,10 +85,11 @@ function printDays(mese){
 //funzione per effettuare la chiamata AJAX
 function holidayOrNot(mese){
    $.ajax({
-      url: "https://flynn.boolean.careers/exercises/api/holidays?year=2018&month=" + (mese-1),
+      url: "https://flynn.boolean.careers/exercises/api/holidays?year=2018&month=" + (mese - 1),
       method: "GET",
       
       success: function (data) {
+         //imposto un controllo , se la lunghezza dell'array è minore di 0 , questa parte di codice non viene eseguita
          if (data.response.length > 0) {
             for (var i = 0; i < data.response.length; i++) {
                console.log(data.response.length)
