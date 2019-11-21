@@ -51,11 +51,33 @@ $(document).ready(function () {
    var mese = 1;
    printDays(mese);
    holidayOrNot(mese);
-  /*  $(document).click(function(){
-      var mese = mese +1
-   }) */
    $("#my_next").click(function(){
-      mese++
+      if(mese == 12){
+         mese = 1
+         $(".calendar").html("")
+         printDays(mese);
+         holidayOrNot(mese);
+      } else{
+         mese++;
+         $(".calendar").html("")
+         printDays(mese);
+         holidayOrNot(mese);
+      }
+      
+      
+   })
+   $("#my_prev").click(function(){
+      if(mese == 1){
+         mese = 12
+         $(".calendar").html("")
+         printDays(mese);
+         holidayOrNot(mese);
+      }else {
+      mese--;
+      $(".calendar").html("")
+      printDays(mese);
+      holidayOrNot(mese);
+      }  
    })
 })
  
@@ -65,7 +87,7 @@ function printDays(mese){
 
    //imposto una variabile , setto anno , mese e giorno di partenza e richiedo il conteggio dei giorni di quel mese
    /* var daysNumber = moment("2018" + mese + "01" , "YYYY-MM-DD").daysInMonth(); */
-   var daysNumber = moment("2018-0" + mese, "YYYY-MM").daysInMonth();
+   var daysNumber = moment("2018-" + mese, "YYYY-MM").daysInMonth();
    
    
    //apro un ciclo for sulla lunghezza del mese che ho selezionato nella mia variabile
