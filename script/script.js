@@ -15,31 +15,75 @@ vado passo passo, isolando una cosa alla volta (prima analisi, poi documentazion
 Buon pome e rimanete in ascolto su questo canale per comunicazioni possibili nel mezzo. :v:
  */
 
+ /* ESEMPI NIKOLAS
+ 
+ //Ottengo una data formattata del momento in cui si esegue questa riga
+var date = moment().format('DD/MM/YYYY');
+
+//Ottengo una data formattata : 02/02/2018
+var date = moment('2018-02-02').format('DD/MM/YYYY');
+
+//Ottengo una data interpretata male di moment : 02 Marzo 2018
+var date = moment('03/02/2018').format('DD MMMM YYYY');
+
+//Quando succede questo è importante "spiegare" a moment che formato abbiamo usato e come lo intendiamo
+var date = moment('03/02/2018', 'DD/MM/YYYY').format('DD/MM/YYYY');
+
+//Prendo il nome del mese : Marzo
+var name = moment(3, 'M').format('MMMM');
+
+//Ottengo il numero di giorni di quello specifico mese
+var numeroDiGiorni = moment('01/01/2018', 'DD/MM/YYYY').daysInMonth();
+
+//Eseguo un ciclo per creare ciascun giorno del mese nel mio html
+for(var i = 1; i <= numeroDiGiorni; i++) {
+
+        //Strutturo la data simile alla chiamata ajax
+        var currentDate = moment('2018-01-'+i, 'YYYY-MM-D').format('YYYY-MM-DD');
+
+        //Uso quella data per prendere le informazioni di quel giorno : numero e nome del giorno
+        var currentDay = moment(currentDate).format('DD dddd');
+
+        //Inserisco nell'html il mio div con attributo per eventuali selettori e la relativa data formattata
+        $('.content').append('<div data-date="'+currentDate+'">'+currentDay+'</div>')
+    } */
+
 $(document).ready(function () {
 
 
 
 
 
-
+   //chiamata ajax da trasformare in funzione esterna
    $.ajax({
       url: "https://flynn.boolean.careers/exercises/api/holidays?year=2018&month=0",
       method: "GET",
       success: function (data) {
          console.log(data.response)
 
+         //imposto una variabile , setto anno , mese e giorno di partenza e richiedo il conteggio dei giorni di quel mese
          var daysNumber = moment("2018-01-01", "YYYY-MM-DD").daysInMonth();
          
+         //apro un ciclo for sulla lunghezza del mese che ho selezionato nella mia variabile
          for (i = 1; i <= daysNumber; i++) {
+            //imposto una variabile che ha valore della data corrente tranne il giorno che sarà definito dal mio index
             var dataCorrente = "2018-01-" + i;
+            //imposto una variabile che stabilisce il formato della mia variabile precedente in modo da renderlo uguale ai valori che mi rilascia l'api che ho utilizzato
             var formatoData = moment(dataCorrente).format("YYYY-MM-DD")
+            console.log(formatoData)
+            //imposto una variabile che sarà la mia stampa in pagina
             var giornoCorrente = moment(dataCorrente).format("DD MMMM");
+            console.log(giornoCorrente);
+            //stampo in pagina
             $(".calendar").append('<li data-date="' + formatoData +'">'+ giornoCorrente +'</li>');
          }
+         //faccio un ciclo FOR per estrapolare i dati dell'oggetto che mi rilascia l'api che ho selezionato
          for (var i = 0; i < data.response.length; i++) {
             console.log("queste sono le date delle festività " + data.response[i].date)
 
+            //imposto una variabile che ha valore date (chiave della mia api)
             var festivita = data.response[i].date  
+            //sostituisco in pagina gli elementi che hanno come attributo un valore uguale alla mia festività , li coloro di rosso e APPEND il nome della festività (altra chiave della mia api)
             $(".calendar [data-date='" + festivita + "']").css("color","red").append(" "+data.response[i].name)
                /* $(".calendar").append('<li data-date="' + dataCorrente + '">' + giornoCorrente + '</li>').css("color","red") */
 
