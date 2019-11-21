@@ -49,34 +49,34 @@ for(var i = 1; i <= numeroDiGiorni; i++) {
 
 $(document).ready(function () {
    var mese = 1;
-   printDays(mese);
    holidayOrNot(mese);
+   printDays(mese);
    $("#my_next").click(function(){
       if(mese == 12){
          mese = 1
          $(".calendar").html("")
-         printDays(mese);
          holidayOrNot(mese);
+         printDays(mese);
       } else{
          mese++;
          $(".calendar").html("")
-         printDays(mese);
          holidayOrNot(mese);
+         printDays(mese);
       }
       
       
    })
    $("#my_prev").click(function(){
       if(mese == 1){
-         mese = 12
+         mese = 12;
          $(".calendar").html("")
-         printDays(mese);
          holidayOrNot(mese);
+         printDays(mese);
       }else {
       mese--;
       $(".calendar").html("")
-      printDays(mese);
       holidayOrNot(mese);
+      printDays(mese);
       }  
    })
 })
@@ -86,7 +86,6 @@ $(document).ready(function () {
 function printDays(mese){
 
    //imposto una variabile , setto anno , mese e giorno di partenza e richiedo il conteggio dei giorni di quel mese
-   /* var daysNumber = moment("2018" + mese + "01" , "YYYY-MM-DD").daysInMonth(); */
    var daysNumber = moment("2018-" + mese, "YYYY-MM").daysInMonth();
    
    
@@ -96,11 +95,11 @@ function printDays(mese){
       var dataCorrente = moment('2018-' + mese + '-' + i , 'YYYY-MM-D').format('YYYY-MM-DD');
       console.log(dataCorrente)
       //imposto una variabile che stabilisce il formato della mia variabile precedente in modo da renderlo uguale ai valori che mi rilascia l'api che ho utilizzato
-      var formatoData = moment(dataCorrente).format("YYYY-MM-DD")
+      /* var formatoData = moment(dataCorrente).format("YYYY-MM-DD") */
       //imposto una variabile che sarà la mia stampa in pagina
-      var giornoCorrente = moment(dataCorrente).format("DD MMMM");
+      var giornoCorrente = moment(dataCorrente).format("dddd DD MMMM");
       //stampo in pagina
-      $(".calendar").append('<li data-date="' + formatoData + '">' + giornoCorrente + '</li>');
+      $(".calendar").append('<div data-date="' + dataCorrente + '">' + giornoCorrente + '</div>');
    }
 }
 
@@ -120,7 +119,7 @@ function holidayOrNot(mese){
                //imposto una variabile che ha valore date (chiave della mia api)
                var festivita = data.response[i].date
                //sostituisco in pagina gli elementi che hanno come attributo un valore uguale alla mia festività , li coloro di rosso e APPEND il nome della festività (altra chiave della mia api)
-               $(".calendar [data-date='" + festivita + "']").css("color", "red").append(" " + data.response[i].name)
+               $(".calendar [data-date='" + festivita + "']").addClass("holidays").append("<br> " + data.response[i].name)
             }
 
          }

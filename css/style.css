@@ -1,0 +1,32 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+button{
+    height: 50px;
+}
+
+.calendar{
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+}
+
+
+
+.calendar div{
+    width: calc(100% / 7);
+    border: 1px solid;
+    padding: 30px;
+    /* margin: 10px; */
+    text-transform: capitalize;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+.holidays{
+    background:rgb(158, 46, 46);
+}
