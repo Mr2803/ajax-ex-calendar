@@ -47,20 +47,18 @@ for(var i = 1; i <= numeroDiGiorni; i++) {
         $('.content').append('<div data-date="'+currentDate+'">'+currentDay+'</div>')
     } */
 
+
 $(document).ready(function () {
    var mese = 1;
-   holidayOrNot(mese);
    printDays(mese);
    $("#my_next").click(function(){
       if(mese == 12){
          mese = 1
          $(".calendar").html("")
-         holidayOrNot(mese);
          printDays(mese);
       } else{
          mese++;
          $(".calendar").html("")
-         holidayOrNot(mese);
          printDays(mese);
       }
       
@@ -70,12 +68,10 @@ $(document).ready(function () {
       if(mese == 1){
          mese = 12;
          $(".calendar").html("")
-         holidayOrNot(mese);
          printDays(mese);
       }else {
       mese--;
       $(".calendar").html("")
-      holidayOrNot(mese);
       printDays(mese);
       }  
    })
@@ -90,22 +86,45 @@ function printDays(mese){
    
    
    //apro un ciclo for sulla lunghezza del mese che ho selezionato nella mia variabile
-   for (i = 1; i <= daysNumber; i++) {
+   for (var i = 1; i <= daysNumber; i++) {
       //imposto una variabile che ha valore della data corrente tranne il giorno che sarà definito dal mio index
       var dataCorrente = moment('2018-' + mese + '-' + i , 'YYYY-MM-D').format('YYYY-MM-DD');
-      console.log(dataCorrente)
-      //imposto una variabile che stabilisce il formato della mia variabile precedente in modo da renderlo uguale ai valori che mi rilascia l'api che ho utilizzato
-      /* var formatoData = moment(dataCorrente).format("YYYY-MM-DD") */
-      //imposto una variabile che sarà la mia stampa in pagina
-      var giornoCorrente = moment(dataCorrente).format("dddd DD MMMM");
+      
+      
+      
+      /* console.log(dataCorrente) */
+
+      var giornoCorrente = moment(dataCorrente).format("dddd DD");
       //stampo in pagina
-      $(".calendar").append('<div data-date="' + dataCorrente + '">' + giornoCorrente + '</div>');
+      var primoGiornoMese = moment('2018-' + mese + '-' + i, 'YYYY-MM-D').day();
+     /*  console.log(primoGiornoMese.valueOf()) */
+      console.log("questo è il primo giorno del mese " + primoGiornoMese)
+      /* var test = moment('2018-' + mese + '-' + i).day(); */
+      /* console.log("questo è il giorno " + test); */
+      if (i == 1){
+         if(primoGiornoMese == 0){
+            primoGiornoMese=7;
+           
+         }
+         for (var y = 1; y < primoGiornoMese; y++) {
+            
+              
+            $(".calendar").append('<div></div>');
+            
+      }
+   }
+      
+
+         $(".calendar").append('<div data-date="' + dataCorrente + '">' + giornoCorrente + '</div>');
+      
+      
       //creo una variabile per il nome del mese
-      var Nomese = moment().month(mese - 1).format("MMMM");
-      console.log(Nomese)
+      var Nomese = moment().years("2018").month(mese - 1).format("MMMM YYYY");
+      /* console.log(Nomese) */
       $("#meseNow").text(Nomese)
       
    }
+   holidayOrNot(mese);
 }
 
 //funzione per effettuare la chiamata AJAX
@@ -118,8 +137,8 @@ function holidayOrNot(mese){
          //imposto un controllo , se la lunghezza dell'array è minore di 0 , questa parte di codice non viene eseguita
          if (data.response.length > 0) {
             for (var i = 0; i < data.response.length; i++) {
-               console.log(data.response.length)
-               console.log("queste sono le date delle festività " + data.response[i].date)
+               /* console.log(data.response.length)
+               console.log("queste sono le date delle festività " + data.response[i].date) */
 
                //imposto una variabile che ha valore date (chiave della mia api)
                var festivita = data.response[i].date
@@ -135,5 +154,8 @@ function holidayOrNot(mese){
       }
    })
 }
+
+// TO DO : SE IL PRIMO GIORNO DEL MESE NON è LUNEDI IL DIV CHE CONTIENE IL GIORNO PARTIRà DAL GIORGNO CHE GLI APPARTIENE
+//probabilmente dovrò effettuare un controllo sul primo giorno e controllare se ha valore lunedi (vedere documentazione di moment)
 
 

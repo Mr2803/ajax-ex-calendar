@@ -25,10 +25,25 @@ button{
     height: 100px;
     display: flex;
     justify-content: center;
+    text-align: center
 }
 
 .holidays{
     background:rgb(158, 46, 46);
+}
+
+.days{
+    width: 80%;
+}
+.days div{
+    width: calc(100% / 7);
+    border: 1px solid;
+    padding: 30px;
+    /* margin: 10px; */
+    text-transform: capitalize;
+    height: 100px;
+    display: flex;
+    justify-content: center;
 }
 
 #meseNow{
