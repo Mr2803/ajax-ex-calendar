@@ -41,11 +41,11 @@ function printDays(mese){
       //condizione necessaria per far ripetere il ciclo interno solo 1 volta , altrimenti creerebbe div vuoti ad ogni giro 
       if (i == 1){
          console.log("questo è il primo giorno del mese " + primoGiornoMese)
-         //condizione necessaria affinchè se il primo giorno è domenica assuma valore 7 non 0 (impostazione di moment) , altrimenti non ci sarebbe ciclo su domenica e quindi non stamperebbe i div vuoti
+         //condizione necessaria affinchè se il primo giorno del mese è domenica allora questo assuma valore 7 e non 0 (impostazione di moment) , altrimenti non ci sarebbe ciclo su domenica e quindi non stamperebbe i div vuoti
          if(primoGiornoMese == 0){
             primoGiornoMese=7;
          }
-         //imposto il ciclo for con variabile minore del valore del primo giorno mese , fino a che la mia var y non raggiunge lo stesso valore del primo giorno del mese verrà generato un div vuoto 
+         //imposto il ciclo for con variabile y minore del valore del primo giorno mese , fino a che la mia var y non raggiunge lo stesso valore del primo giorno del mese verrà generato un div vuoto 
          for (var y = 1; y < primoGiornoMese; y++) {
             $(".calendar").append('<div></div>');
          }
@@ -81,5 +81,4 @@ function holidayOrNot(mese){
       }
    })
 }
-
 
