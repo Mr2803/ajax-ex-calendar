@@ -14,8 +14,6 @@ button{
     width: 80%;
 }
 
-
-
 .calendar div{
     width: calc(100% / 7);
     border: 1px solid;
@@ -28,8 +26,12 @@ button{
     text-align: center
 }
 
+.calendar div:nth-child(7n){
+    background:pink;
+}
+
 .holidays{
-    background:rgb(158, 46, 46);
+    background:rgb(158, 46, 46) !important;
 }
 
 .days{
