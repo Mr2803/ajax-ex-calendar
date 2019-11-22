@@ -100,6 +100,11 @@ function printDays(mese){
       var giornoCorrente = moment(dataCorrente).format("dddd DD MMMM");
       //stampo in pagina
       $(".calendar").append('<div data-date="' + dataCorrente + '">' + giornoCorrente + '</div>');
+      //creo una variabile per il nome del mese
+      var Nomese = moment().month(mese - 1).format("MMMM");
+      console.log(Nomese)
+      $("#meseNow").text(Nomese)
+      
    }
 }
 
@@ -120,6 +125,7 @@ function holidayOrNot(mese){
                var festivita = data.response[i].date
                //sostituisco in pagina gli elementi che hanno come attributo un valore uguale alla mia festività , li coloro di rosso e APPEND il nome della festività (altra chiave della mia api)
                $(".calendar [data-date='" + festivita + "']").addClass("holidays").append("<br> " + data.response[i].name)
+               
             }
 
          }

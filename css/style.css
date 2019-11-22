@@ -30,3 +30,7 @@ button{
 .holidays{
     background:rgb(158, 46, 46);
 }
+
+#meseNow{
+    text-transform: uppercase;
+}
