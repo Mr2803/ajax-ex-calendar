@@ -76,11 +76,11 @@ button{
 
 
 .calendar div:nth-child(7n){
-    background:pink;
+    background:#887e7e91;
 }
 
 .holidays{
-    background:rgb(158, 46, 46) !important;
+    background:#9b3b3bd1 !important;
 }
 
 .days{

@@ -23,6 +23,15 @@ $(document).ready(function () {
       printDays(mese);
       }  
    })
+
+   $(document).on("click", ".calendar div", function (event) {
+      //creo una variabile per comodità per far riferimento a quell elemento
+      var elem = $(this);
+      console.log("hai selezionato la data " + elem.attr("data-date"))
+      //cerco all'interno di
+      elem.parents(".container-fluid").find("#test").text(elem.attr("data-date"));
+
+   });
 })
 
 //funzione per stampare i giorni del mese
@@ -36,8 +45,10 @@ function printDays(mese){
       /* console.log(dataCorrente) */
       var giornoCorrente = moment(dataCorrente).format("DD");
 
+      /* mondayOrNot(mese,i); */
+
       //imposto una variabile che mi rilascerà un valore numerico del giorno del primo mese (discriminante per i miei controlli successivi)
-      var primoGiornoMese = moment('2018-' + mese, 'YYYY-MM').day();
+       var primoGiornoMese = moment('2018-' + mese, 'YYYY-MM').day();
       //condizione necessaria per far ripetere il ciclo interno solo 1 volta , altrimenti creerebbe div vuoti ad ogni giro 
       if (i == 1){
          console.log("questo è il primo giorno del mese " + primoGiornoMese)
@@ -49,9 +60,10 @@ function printDays(mese){
          for (var y = 1; y < primoGiornoMese; y++) {
             $(".calendar").append("<div class='disabled'></div>");
          }
-      }
+      } 
       //stampo in pagina
       $(".calendar").append('<div data-date="' + dataCorrente + '">' + '<p>' + giornoCorrente + '</p>' + '</div>');
+      
       //creo una variabile per il nome del mese
       var Nomese = moment().years("2018").month(mese - 1).format("MMMM YYYY");
       /* console.log(Nomese) */
@@ -82,3 +94,21 @@ function holidayOrNot(mese){
    })
 }
 
+//funzione per generare div vuoti se il primo giorno del mese non è lunedì
+
+/* function mondayOrNot(mese,x){
+   //imposto una variabile che mi rilascerà un valore numerico del giorno del primo mese (discriminante per i miei controlli successivi)
+   var primoGiornoMese = moment('2018-' + mese, 'YYYY-MM').day();
+   //condizione necessaria per far ripetere il ciclo interno solo 1 volta , altrimenti creerebbe div vuoti ad ogni giro 
+   if (x == 1) {
+      console.log("questo è il primo giorno del mese " + primoGiornoMese)
+      //condizione necessaria affinchè se il primo giorno del mese è domenica allora questo assuma valore 7 e non 0 (impostazione di moment) , altrimenti non ci sarebbe ciclo su domenica e quindi non stamperebbe i div vuoti
+      if (primoGiornoMese == 0) {
+         primoGiornoMese = 7;
+      }
+      //imposto il ciclo for con variabile y minore del valore del primo giorno mese , fino a che la mia var y non raggiunge lo stesso valore del primo giorno del mese verrà generato un div vuoto 
+      for (var y = 1; y < primoGiornoMese; y++) {
+         $(".calendar").append("<div class='disabled'></div>");
+      }
+   };
+} */
