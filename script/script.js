@@ -26,12 +26,17 @@ $(document).ready(function () {
 
    $(document).on("click", ".calendar div", function (event) {
       //creo una variabile per comodità per far riferimento a quell elemento
-      $(".calendar div").removeClass("yellow")
+      $(".calendar div").removeClass("selected")
       var elem = $(this);
-      elem.addClass("yellow");
-      console.log("hai selezionato la data " + elem.attr("data-date"))
-      //cerco all'interno di
-      elem.parents(".container-fluid").find("#test").text("Hai selezionato la data " + elem.attr("data-date"));
+      if (elem.hasClass("disabled")){
+         elem.parents(".container-fluid").find("#date").text("Hai selezionato una data non valida")
+      } else{
+         elem.addClass("selected");
+         console.log("hai selezionato la data " + elem.attr("data-date"))
+         //cerco all'interno di
+         elem.parents(".container-fluid").find("#date").text("Hai selezionato la data " + elem.attr("data-date"));
+      }
+      
 
    });
 })

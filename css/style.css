@@ -88,6 +88,13 @@ button{
 }
 
 
-.yellow{
-    background:yellow;
+.selected{
+    background:#858d95 !important;
+}
+
+#date{
+    padding: 10px;
+    font-size: 30px;
+    background: rgba(66, 66, 66, 1);
+    color: white;
 }
