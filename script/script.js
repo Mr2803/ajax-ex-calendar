@@ -5,36 +5,42 @@ $(document).ready(function () {
       if(mese == 12){
          mese = 1
          $(".calendar").html("")
+         $("#date").text("")
          printDays(mese);
       } else{
          mese++;
          $(".calendar").html("")
+         $("#date").text("")
          printDays(mese);
       }
    })
    $("#my_prev").click(function(){
       if(mese == 1){
          mese = 12;
-         $(".calendar").html("")
+         $(".calendar").html("");
+         $("#date").text("");
          printDays(mese);
       }else {
       mese--;
-      $(".calendar").html("")
+      $(".calendar").html("");
+      $("#date").text("");
       printDays(mese);
       }  
    })
 
    $(document).on("click", ".calendar div", function (event) {
-      //creo una variabile per comodità per far riferimento a quell elemento
+      //rimuovo a prescindere a tutti la classe selected
       $(".calendar div").removeClass("selected")
+      //creo una variabile per comodità per far riferimento a quell elemento
       var elem = $(this);
+      //imposto la condizione , se l'elemento selezionato è uno dei miei div fittizzi allora il messaggio che verrà rilasciato sarà , hai selezionato una data non valida
       if (elem.hasClass("disabled")){
          elem.parents(".container-fluid").find("#date").text("Hai selezionato una data non valida")
-      } else{
+      } else{ //altrimenti aggiungo la mia classe selected che cambia il colore di sfondo e stampa in un contenitore sottostante la data che è stata selezionata.
          elem.addClass("selected");
-         console.log("hai selezionato la data " + elem.attr("data-date"))
+         console.log("hai selezionato la data " + elem.attr("data-print"))
          //cerco all'interno di
-         elem.parents(".container-fluid").find("#date").text("Hai selezionato la data " + elem.attr("data-date"));
+         elem.parents(".container-fluid").find("#date").text("Hai selezionato " + elem.attr("data-print"));
       }
       
 
@@ -49,6 +55,7 @@ function printDays(mese){
    for (var i = 1; i <= daysNumber; i++) {
       //imposto una variabile che ha valore della data corrente tranne il giorno che sarà definito dal mio index
       var dataCorrente = moment('2018-' + mese + '-' + i , 'YYYY-MM-D').format('YYYY-MM-DD');
+      var dataStampa = moment(i + '-' + mese + '-' + '2018', 'D-MM-YYYY').format('dddd DD MMMM YYYY');
       /* console.log(dataCorrente) */
       var giornoCorrente = moment(dataCorrente).format("DD");
 
@@ -69,7 +76,7 @@ function printDays(mese){
          }
       } 
       //stampo in pagina
-      $(".calendar").append('<div data-date="' + dataCorrente + '">' + '<p>' + giornoCorrente + '</p>' + '</div>');
+      $(".calendar").append('<div data-date="' + dataCorrente + '" data-print="' + dataStampa + '">' + '<p>' + giornoCorrente + '</p>' + '</div>');
       
       //creo una variabile per il nome del mese
       var Nomese = moment().years("2018").month(mese - 1).format("MMMM YYYY");
