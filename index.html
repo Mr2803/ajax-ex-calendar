@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
@@ -12,20 +13,23 @@
 <body>
     <div class="container-fluid mt-5">
         <div class="row">
-            <div class="col-12 d-flex justify-content-around">
-                <button id="my_prev" class="btn btn-primary">Mese precedente</button>
-                <h2 id="meseNow"></h2>
-                <button id="my_next" class="btn btn-primary">Mese successivo</button>
-            </div>
             <div class="col-12 d-flex justify-content-center">
+                <div class="my_style d-flex justify-content-around align-items-center">
+
+                    <i id="my_prev" class="fas fa-caret-left"></i>
+                    <h2 id="meseNow"></h2>
+                    <i id="my_next" class="fas fa-caret-right"></i>
+                </div>
+            </div>
+            <div class="col-12 d-flex justify-content-center mt-5">
                  <div class="days d-flex">
-                     <div>Lunedì</div>
-                     <div>Martedì</div>
-                     <div>Mercoledì</div>
-                     <div>Giovedì</div>
-                     <div>Venerdì</div>
-                     <div>Sabato</div>
-                     <div>Domenica</div>
+                     <div>Lun</div>
+                     <div>Mar</div>
+                     <div>Mer</div>
+                     <div>Gio</div>
+                     <div>Ven</div>
+                     <div>Sab</div>
+                     <div>Dom</div>
                  </div>
             </div>
         </div>

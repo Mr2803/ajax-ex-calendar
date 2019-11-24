@@ -4,8 +4,34 @@
     box-sizing: border-box;
 }
 
+body{
+    background:#4A4A4A;
+}
+
 button{
     height: 50px;
+}
+
+.my_style{
+    background:rgba(66, 66, 66, 1) ;
+    width: 20%;
+}
+
+#meseNow{
+    text-transform: capitalize;
+    color: white;
+}
+
+#my_next,
+#my_prev{
+    color: rgba(160, 159, 160, 1);
+    font-size: 40px;
+    cursor: pointer;
+}
+
+#my_next:hover,
+#my_prev:hover{
+    color:white;
 }
 
 .calendar{
@@ -14,17 +40,40 @@ button{
     width: 80%;
 }
 
-.calendar div{
+.calendar div,
+.days div{
     width: calc(100% / 7);
-    border: 1px solid;
     padding: 30px;
-    /* margin: 10px; */
     text-transform: capitalize;
     height: 100px;
     display: flex;
     justify-content: center;
-    text-align: center
+    text-align: center;
+    color:white;
 }
+.days div{
+   font-size: 30px;
+   font-weight: bold;
+}
+
+.calendar div{
+    border: 1px solid lightgray;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+}
+
+.calendar div.disabled{
+    color: rgba(152, 160, 166, 0.6);
+    background-color: rgba(66, 66, 66, 1);
+    background-image: url(../img/disabled.svg);
+}
+
+.calendar div p:first-child{
+    font-size: 50px;
+    font-weight: bold;
+}
+
 
 .calendar div:nth-child(7n){
     background:pink;
@@ -37,17 +86,5 @@ button{
 .days{
     width: 80%;
 }
-.days div{
-    width: calc(100% / 7);
-    border: 1px solid;
-    padding: 30px;
-    /* margin: 10px; */
-    text-transform: capitalize;
-    height: 100px;
-    display: flex;
-    justify-content: center;
-}
 
-#meseNow{
-    text-transform: uppercase;
-}
+

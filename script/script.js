@@ -47,11 +47,11 @@ function printDays(mese){
          }
          //imposto il ciclo for con variabile y minore del valore del primo giorno mese , fino a che la mia var y non raggiunge lo stesso valore del primo giorno del mese verrà generato un div vuoto 
          for (var y = 1; y < primoGiornoMese; y++) {
-            $(".calendar").append('<div></div>');
+            $(".calendar").append("<div class='disabled'></div>");
          }
       }
       //stampo in pagina
-      $(".calendar").append('<div data-date="' + dataCorrente + '">' + giornoCorrente + '</div>');
+      $(".calendar").append('<div data-date="' + dataCorrente + '">' + '<p>' + giornoCorrente + '</p>' + '</div>');
       //creo una variabile per il nome del mese
       var Nomese = moment().years("2018").month(mese - 1).format("MMMM YYYY");
       /* console.log(Nomese) */
@@ -72,7 +72,7 @@ function holidayOrNot(mese){
                //imposto una variabile che ha valore date (chiave della mia api)
                var festivita = data.response[i].date
                //sostituisco in pagina gli elementi che hanno come attributo un valore uguale alla mia festività , li coloro di rosso e APPEND il nome della festività (altra chiave della mia api)
-               $(".calendar [data-date='" + festivita + "']").addClass("holidays").append("<br> " + data.response[i].name)
+               $(".calendar [data-date='" + festivita + "']").addClass("holidays").append( "<p>" + data.response[i].name + "</p>")
             }
          }
       },
