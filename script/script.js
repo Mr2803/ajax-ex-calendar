@@ -26,10 +26,12 @@ $(document).ready(function () {
 
    $(document).on("click", ".calendar div", function (event) {
       //creo una variabile per comodità per far riferimento a quell elemento
+      $(".calendar div").removeClass("yellow")
       var elem = $(this);
+      elem.addClass("yellow");
       console.log("hai selezionato la data " + elem.attr("data-date"))
       //cerco all'interno di
-      elem.parents(".container-fluid").find("#test").text(elem.attr("data-date"));
+      elem.parents(".container-fluid").find("#test").text("Hai selezionato la data " + elem.attr("data-date"));
 
    });
 })
