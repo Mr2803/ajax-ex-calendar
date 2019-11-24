@@ -4,12 +4,12 @@ $(document).ready(function () {
    $("#my_next").click(function(){
       if(mese == 12){
          mese = 1
-         $(".calendar").html("")
+         $(".calendar").text("")
          $("#date").text("")
          printDays(mese);
       } else{
          mese++;
-         $(".calendar").html("")
+         $(".calendar").text("")
          $("#date").text("")
          printDays(mese);
       }
@@ -17,17 +17,16 @@ $(document).ready(function () {
    $("#my_prev").click(function(){
       if(mese == 1){
          mese = 12;
-         $(".calendar").html("");
+         $(".calendar").text("");
          $("#date").text("");
          printDays(mese);
       }else {
-      mese--;
-      $(".calendar").html("");
-      $("#date").text("");
-      printDays(mese);
-      }  
+         mese--;
+         $(".calendar").text("");
+         $("#date").text("");
+         printDays(mese);
+         }  
    })
-
    $(document).on("click", ".calendar div", function (event) {
       //rimuovo a prescindere a tutti la classe selected
       $(".calendar div").removeClass("selected")
@@ -38,12 +37,9 @@ $(document).ready(function () {
          elem.parents(".container-fluid").find("#date").text("Hai selezionato una data non valida")
       } else{ //altrimenti aggiungo la mia classe selected che cambia il colore di sfondo e stampa in un contenitore sottostante la data che è stata selezionata.
          elem.addClass("selected");
-         console.log("hai selezionato la data " + elem.attr("data-print"))
-         //cerco all'interno di
+         //console.log("hai selezionato la data " + elem.attr("data-print"));
          elem.parents(".container-fluid").find("#date").text("Hai selezionato " + elem.attr("data-print"));
       }
-      
-
    });
 })
 
@@ -54,7 +50,8 @@ function printDays(mese){
    //apro un ciclo for sulla lunghezza del mese che ho selezionato nella mia variabile
    for (var i = 1; i <= daysNumber; i++) {
       //imposto una variabile che ha valore della data corrente tranne il giorno che sarà definito dal mio index
-      var dataCorrente = moment('2018-' + mese + '-' + i , 'YYYY-MM-D').format('YYYY-MM-DD');
+      var dataCorrente = moment('2018-' + mese + '-' + i , 'YYYY-MM-DD').format('YYYY-MM-DD');
+      //questa variabile mi serve solo per stampare il valore del giorno selezionato in un formato migliore
       var dataStampa = moment(i + '-' + mese + '-' + '2018', 'D-MM-YYYY').format('dddd DD MMMM YYYY');
       /* console.log(dataCorrente) */
       var giornoCorrente = moment(dataCorrente).format("DD");
@@ -97,8 +94,9 @@ function holidayOrNot(mese){
             for (var i = 0; i < data.response.length; i++) {
                //imposto una variabile che ha valore date (chiave della mia api)
                var festivita = data.response[i].date
+               var nomeFestivita = data.response[i].name
                //sostituisco in pagina gli elementi che hanno come attributo un valore uguale alla mia festività , li coloro di rosso e APPEND il nome della festività (altra chiave della mia api)
-               $(".calendar [data-date='" + festivita + "']").addClass("holidays").append( "<p>" + data.response[i].name + "</p>")
+               $(".calendar [data-date='" + festivita + "']").addClass("holidays").append("<p>" + nomeFestivita + "</p>");
             }
          }
       },
